@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_settings/helper/custome_divider.dart';
+import 'package:flutter_web_settings/helper/custome_elevated_button.dart';
 
 class GeneralSettingsTab extends StatefulWidget {
   const GeneralSettingsTab({super.key});
@@ -17,8 +19,15 @@ class _GeneralSettingsTabState extends State<GeneralSettingsTab> {
       padding: const EdgeInsets.all(16.0),
       child: ListView(
         children: [
+          const Padding(
+            padding: EdgeInsets.only(left: 14),
+            child: Text("Email preferences",
+                style: TextStyle(color: Colors.white, fontSize: 20)),
+          ),
           SwitchListTile(
-            title: const Text('Email preferences - Updates'),
+            inactiveThumbColor: Colors.white,
+            activeColor: Colors.white,
+            title: const Text('Updates'),
             value: iconValue1,
             onChanged: (bool value) {
               setState(() {
@@ -26,8 +35,11 @@ class _GeneralSettingsTabState extends State<GeneralSettingsTab> {
               });
             },
           ),
+          const MyDivider(),
           SwitchListTile(
-            title: const Text('Email preferences - Recommendations'),
+            inactiveThumbColor: Colors.white,
+            activeColor: Colors.white,
+            title: const Text('Recommendations'),
             value: iconValue2,
             onChanged: (bool value) {
               setState(() {
@@ -35,32 +47,49 @@ class _GeneralSettingsTabState extends State<GeneralSettingsTab> {
               });
             },
           ),
+          const MyDivider(),
           ListTile(
-            title: const Text('Language'),
-            trailing: DropdownButton<String>(
-              value: 'English UK',
-              onChanged: (newValue) {},
-              items: <String>['English UK', 'English US']
-                  .map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
+            title: const Text(
+              'Language',
+            ),
+            trailing: Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.white),
+                borderRadius: BorderRadius.circular(4.0),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                  elevation: 0,
+                  style: const TextStyle(color: Colors.white),
+                  value: 'English UK',
+                  onChanged: (newValue) {},
+                  items: <String>['English UK', 'English US']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+              ),
             ),
           ),
+          const MyDivider(),
           ListTile(
             title: const Text('Theme'),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Radio(
+                  activeColor: Colors.white,
                   value: 'Dark',
                   groupValue: 'Dark',
                   onChanged: (value) {},
                 ),
                 const Text('Dark'),
                 Radio(
+                  activeColor: Colors.white,
                   value: 'Light',
                   groupValue: 'Dark',
                   onChanged: (value) {},
@@ -69,6 +98,7 @@ class _GeneralSettingsTabState extends State<GeneralSettingsTab> {
               ],
             ),
           ),
+          const MyDivider(),
           ListTile(
             title: const Text('Feedback & Suggestion'),
             trailing: ElevatedButton(
@@ -78,8 +108,11 @@ class _GeneralSettingsTabState extends State<GeneralSettingsTab> {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              ElevatedButton(onPressed: () {}, child: const Text('Cancel')),
-              const SizedBox(width: 8),
+              const MyElevatedButton(
+                text: "Cancel",
+                color: Colors.teal,
+              ),
+              const SizedBox(width: 10),
               ElevatedButton(
                   onPressed: () {}, child: const Text('Save Settings')),
             ],

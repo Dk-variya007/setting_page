@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_web_settings/view/general_setting_page.dart';
-
 import 'account_setting_page.dart';
+import 'general_setting_page.dart';
 import 'billing_page.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -27,6 +26,8 @@ class _SettingsPageState extends State<SettingsPage>
       appBar: AppBar(
         title: const Text('Settings'),
         bottom: TabBar(
+          indicatorColor: Colors.teal,
+          indicatorWeight: 5,
           controller: _tabController,
           tabs: const [
             Tab(text: 'Account Settings'),
@@ -35,13 +36,12 @@ class _SettingsPageState extends State<SettingsPage>
           ],
         ),
       ),
-      backgroundColor: Colors.black,
       body: TabBarView(
         controller: _tabController,
-        children: [
+        children: const [
           AccountSettingsTab(),
-          const GeneralSettingsTab(),
-          const BillingTab(),
+          GeneralSettingsTab(),
+          BillingTab(),
         ],
       ),
     );
